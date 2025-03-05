@@ -7,33 +7,124 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CIS 228 Assignment 3',
+      title: 'User Profile',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const ProfileScreen(),
+      home: const MyHomePage(title: 'User Profile'),
     );
   }
 }
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final Map<String, bool> _interests = {
+    'Music': false,
+    'Sports': false,
+    'Reading': false,
+  };
+
+  void _submitData() {
+    print('----- User Data -----');
+    print('Name: ${_nameController.text}');
+    print('Email: ${_emailController.text}');
+    print('Selected Interests:');
+    _interests.forEach((interest, selected) {
+      if (selected) print('- $interest');
+    });
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Profile"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          // put your codes here
-        ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // Profile Picture
+              Image.network(
+                'https://i.pinimg.com/736x/4b/c4/89/4bc4892b2b262d0c5b7a1e7351b17330.jpg',
+                width: 150,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(height: 20),
+
+              // Name TextField
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Name',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Email TextField
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Interests Checkboxes
+              ..._interests.keys.map((interest) => CheckboxListTile(
+                    title: Text(interest),
+                    value: _interests[interest],
+                    onChanged: (value) =>
+                        setState(() => _interests[interest] = value!),
+                  )),
+
+              // Submit Button
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ElevatedButton(
+                  onPressed: _submitData,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 15),
+                  ),
+                  child: const Text('Submit', style: TextStyle(fontSize: 18)),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
