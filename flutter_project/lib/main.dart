@@ -4,128 +4,169 @@ void main() {
   runApp(const MyApp());
 }
 
+class Member {
+  final String name;
+  final String year;
+  final String section;
+  final String bio;
+  final String imageUrl;
+
+  Member({
+    required this.name,
+    required this.year,
+    required this.section,
+    required this.bio,
+    this.imageUrl = 'https://via.placeholder.com/150',
+  });
+}
+
+class DashboardScreen extends StatelessWidget {
+  final List<Member> members = [
+    Member(
+        name: 'Eric Elevencione',
+        year: '2023',
+        section: 'IS - 3A',
+        bio:
+            'A passionate developer with 3 years of experience in mobile app development.',
+        imageUrl: 'assets/Peter.jpg'),
+    Member(
+        name: 'Jhan Philip Sustiguer',
+        year: '2024',
+        section: 'IS - 3A',
+        bio:
+            'UI/UX designer specializing in creating beautiful user interfaces.',
+        imageUrl: 'assets/372555b0-13ad-49dc-87bf-dfc73fd9e543.jpg'),
+    // Add more members as needed
+  ];
+
+  DashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Team Members')),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 0.8,
+        ),
+        itemCount: members.length,
+        itemBuilder: (context, index) {
+          final member = members[index];
+          return GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(member: member),
+              ),
+            ),
+            child: Card(
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(member.imageUrl),
+                      radius: 30,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      member.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text('Year: ${member.year}'),
+                    Text('Section: ${member.section}'),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  final Member member;
+
+  const ProfileScreen({super.key, required this.member});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('${member.name}\'s Profile')),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(member.imageUrl),
+                radius: 60,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                member.name,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Year: ${member.year} | Section: ${member.section}',
+                style: const TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              const Divider(),
+              const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'About Me',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                member.bio,
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.justify,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'User Profile',
+      title: 'Team Dashboard',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(title: 'User Profile'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final Map<String, bool> _interests = {
-    'Music': false,
-    'Sports': false,
-    'Reading': false,
-  };
-
-  void _submitData() {
-    print('----- User Data -----');
-    print('Name: ${_nameController.text}');
-    print('Email: ${_emailController.text}');
-    print('Selected Interests:');
-    _interests.forEach((interest, selected) {
-      if (selected) print('- $interest');
-    });
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Profile Picture
-              Image.network(
-                'https://images.pexels.com/photos/30495756/pexels-photo-30495756/free-photo-of-rustic-wooden-chairs-in-lush-antalya-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                width: 150,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 20),
-
-              // Name TextField
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: _nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Email TextField
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Interests Checkboxes
-              ..._interests.keys.map((interest) => CheckboxListTile(
-                    title: Text(interest),
-                    value: _interests[interest],
-                    onChanged: (value) =>
-                        setState(() => _interests[interest] = value!),
-                  )),
-
-              // Submit Button
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: ElevatedButton(
-                  onPressed: _submitData,
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
-                  ),
-                  child: const Text('Submit', style: TextStyle(fontSize: 18)),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: DashboardScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
