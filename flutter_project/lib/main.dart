@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               // Profile Picture
               Image.network(
-                'https://i.pinimg.com/736x/4b/c4/89/4bc4892b2b262d0c5b7a1e7351b17330.jpg',
+                'https://images.pexels.com/photos/30495756/pexels-photo-30495756/free-photo-of-rustic-wooden-chairs-in-lush-antalya-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                 width: 150,
                 height: 150,
                 fit: BoxFit.cover,
