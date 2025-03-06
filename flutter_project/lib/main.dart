@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget {
         year: '2024',
         section: 'IS - 3A',
         bio: 'All I wanted was happiness, backpain is what I got.',
-        imageUrl: 'kelly.jpg'),
+        imageUrl: 'assets/kelly.jpg'),
     // Add more members as needed
   ];
 
