@@ -32,7 +32,7 @@ class DashboardScreen extends StatelessWidget {
         name: 'Jhan Philip Sustiguer',
         year: '2024',
         section: 'IS - 3A',
-        bio: 'All I wanted was happiness, back is what I got.',
+        bio: 'All I wanted was happiness, backpain is what I got.',
         imageUrl: 'kelly.jpg'),
     // Add more members as needed
   ];
