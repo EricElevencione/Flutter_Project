@@ -26,16 +26,14 @@ class DashboardScreen extends StatelessWidget {
         name: 'Eric Elevencione',
         year: '2023',
         section: 'IS - 3A',
-        bio:
-            'A passionate developer with 3 years of experience in mobile app development.',
+        bio: 'Im not special, Im just limited edition.',
         imageUrl: 'assets/Peter.jpg'),
     Member(
         name: 'Jhan Philip Sustiguer',
         year: '2024',
         section: 'IS - 3A',
-        bio:
-            'UI/UX designer specializing in creating beautiful user interfaces.',
-        imageUrl: 'assets/372555b0-13ad-49dc-87bf-dfc73fd9e543.jpg'),
+        bio: 'All I wanted was happiness, back is what I got.',
+        imageUrl: 'kelly.jpg'),
     // Add more members as needed
   ];
 
