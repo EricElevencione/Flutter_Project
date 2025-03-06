@@ -24,14 +24,14 @@ class DashboardScreen extends StatelessWidget {
   final List<Member> members = [
     Member(
         name: 'Eric Elevencione',
-        year: '2023',
-        section: 'IS - 3A',
+        year: '2025',
+        section: 'BSIS - 3A',
         bio: 'Im not special, Im just limited edition.',
         imageUrl: 'assets/Peter.jpg'),
     Member(
         name: 'Jhan Philip Sustiguer',
-        year: '2024',
-        section: 'IS - 3A',
+        year: '2025',
+        section: 'BSIS - 3A',
         bio: 'All I wanted was happiness, backpain is what I got.',
         imageUrl: 'assets/kelly.jpg'),
     // Add more members as needed
