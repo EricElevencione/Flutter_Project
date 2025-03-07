@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(
-                  'pfp.jpg',
+                  'pfp2.png',
                   width: 150,
                   height: 150,
                   fit: BoxFit.cover,
