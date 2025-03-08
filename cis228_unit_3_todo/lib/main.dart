@@ -1,4 +1,5 @@
-import 'package:cis_228_unit_3_todo/screens/HomeScreen.dart';
+import 'package:cis228_unit_3_todo/screens/HomeScreen.dart';
+import 'package:cis228_unit_3_todo/screens/AddTaskScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,17 +9,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(),
-
-      // Starting screen of your application
-      home: HomeScreen(),
-
-      // Modify here to add named routes
+      title: 'To-Do List',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/addTask': (context) => AddTaskScreen(),
+      },
     );
   }
 }

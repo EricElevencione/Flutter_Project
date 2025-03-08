@@ -26,7 +26,7 @@ class DashboardScreen extends StatelessWidget {
       name: 'Eric Elevencione',
       year: '2025',
       section: 'BSIS - 3A',
-      bio: 'Im not special, Im just limited edition.',
+      bio: 'Hardwork beats Talent.',
       imageUrl: 'assets/Peter.jpg',
     ),
     Member(
